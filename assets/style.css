@@ -6,11 +6,12 @@
 body {
     margin: 0;
     background-color: #fafbff;
+    text-decoration: none;
 
 }
 
 header {
-    display: flex;
+    display: block;
     justify-content: space-between;
     padding: 20px;
     background-color: #212121;
@@ -23,11 +24,11 @@ header {
 h1 {
     color: white;
     text-decoration-style: none;
-
 }
 
 h2 {
-   padding-right: 40px;
+   display: block;
+   text-align: right;
 }
 
 h3 {
