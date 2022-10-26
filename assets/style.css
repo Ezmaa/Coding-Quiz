@@ -4,20 +4,41 @@
 }
 
 body {
-    margin: 0;
-    background-color: #fafbff;
-    text-decoration: none;
+ display: block;
+ width: 100vw;
+ height: 100vh;
+ background-color: lightblue;
 
 }
 
+.container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin: 0;
+    background-color: #fafbff;
+    text-decoration: none;
+    padding: 0%;
+    margin: 0%;
+}
 header {
-    display: block;
+    display: flex;
     justify-content: space-between;
     padding: 20px;
     background-color: #212121;
     color: white;
     text-decoration: none;
+    width: 100vw;
     
+}
+
+.main-question {
+    text-decoration: none;
+    text-align: center;
+}
+#start-button  {
+    display: flex;
+
 }
 
 /* need to get link for high score to have no text decoration */

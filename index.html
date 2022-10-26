@@ -11,22 +11,26 @@
 
 <body>
     <Header>
-        <h1 id="time"></a></h1>
+        <h1 id="time">75</a></h1>
         <h2 id="high"><a href="#Highscore">View High Score</h2>
     </Header>
-    <div>
-        <h3>Coding Quiz</h3>
+    <div class="container">
+        <div class="main-question">
+            <h3>Are you ready for the coding quiz?</h3>
+            <p>Press the start button to begin quiz!</p>
+            <button id="start-button">Start</button>
+        </div>
     </div>
-
     <main>
         <section class="questions">
-            <h4>'Quiz question displayed here'</h4>
+            <h4 id="quiz-question"></h4>
             <ol>
-                <li id="q1">Question</li>
-                <li id="q2">Question</li>
-                <li id="q3">Question</li>
-                <li id="q4">Question</li>
+                <li id="q1"><button></button></li>
+                <li id="q2"><button></button></li>
+                <li id="q3"><button></button></li>
+                <li id="q4"><button></button></li>
             </ol>
+            <h5 id="wrong-right"></h5>
         </section>
     </main>
 </body>
