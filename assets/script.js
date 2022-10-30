@@ -1,6 +1,6 @@
 // Add class selectors
 const timeEl = document.getElementById("time");
-const questionEl = document.querySelector('h3');
+const questionEl = document.querySelector('h4');
 const finalScore = document.getElementById('score-page');
 const choicesEl = document.querySelector('ol');
 const highScoreEl = document.getElementById('high');
@@ -49,6 +49,7 @@ function displayQuestions() {
   }
 }
 
+// checks answer adds points or subtracts from timer
 function checkAnswer(event) {
   event.preventDefault();
   console.log(event.target.innerHTML)
@@ -100,13 +101,12 @@ function startTime() {
     timeEl.textContent = "Time Left: " + secondsLeft;
     if (secondsLeft <= 0) {
       clearInterval(timerInterval);
-      if (questionsArr[index] === questionsArr.length) {
-        endGame();
-      }
+      if (questionsArr[i] < questionsArr.length) {
+      endGame();
     }
-
+    
   }, 1000);
-}
+};
 
 function endGame() {
   timeEl.sytle.display = "none";
