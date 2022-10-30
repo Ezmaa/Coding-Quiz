@@ -1,9 +1,10 @@
 // Add class selectors
 const timeEl = document.getElementById("time");
-const questionEl = document.querySelector('h4')
-const choicesEl = document.querySelector('ol')
+const questionEl = document.querySelector('h3');
+const finalScore = document.getElementById('score-page');
+const choicesEl = document.querySelector('ol');
 const highScoreEl = document.getElementById('high');
-const wrongOrRight = document.querySelector('h5');
+const initialStart = document.getElementById('start');
 const startButtonEl = document.getElementById('start-button');
 
 let start = true;
@@ -20,7 +21,7 @@ let questionsArr = [
   {
     question: 'Javascript is an _______ language?',
     choices: ["Object-Oriented", "Object-Based", "Procedural", "None of the above"],
-    answer: "Object-oriented",
+    answer: "Object-Oriented",
   },
   {
     question: 'Which of the following methods is used to access HTML elements using Javascript?',
@@ -34,19 +35,16 @@ let questionsArr = [
   }
 ]
 
+// sorts array and displays questions + answers 
 function displayQuestions() {
   questionEl.textContent = questionsArr[index].question
-
   choicesEl.textContent = '';
   for (let i = 0; i < questionsArr[index].choices.length; i++) {
     //create html tag for each one of the choices
     let li = document.createElement('li');
-
     //display text on li
     li.textContent = questionsArr[index].choices[i]
-
     choicesEl.appendChild(li)
-
     li.onclick = checkAnswer;
   }
 }
@@ -64,28 +62,31 @@ function checkAnswer(event) {
     //substract time by 10
     secondsLeft = secondsLeft - 10;
     timeEl.textContent = "Time Left: " + secondsLeft;
+
   }
   //compare index to length of questionsArr
   //if end of array, end game
   //else
+
   index++;
   displayQuestions();
 }
 
-function endGame() {
 
-}
+
 
 // index++
 // example()
 
-function init() {
-  getscores();
-}
+// function init() {
+//   getscores();
+// }
+
 // added start button 
 function beginQuiz() {
   secondsLeft = 50;
-  startButtonEl.disabled = true;
+  startButtonEl.hidden = true;
+  initialStart.textContent = "";
   startTime();
   displayQuestions()
 }
@@ -97,18 +98,21 @@ function startTime() {
   const timerInterval = setInterval(function () {
     secondsLeft--;
     timeEl.textContent = "Time Left: " + secondsLeft;
-    if (secondsLeft === 0) {
+    if (secondsLeft <= 0) {
       clearInterval(timerInterval);
-      sendMessage();
+      if (questionsArr[index] === questionsArr.length) {
+        endGame();
+      }
     }
 
   }, 1000);
 }
 
-function sendMessage() {
-  timeEl.textContent = " ";
-  
-
+function endGame() {
+  timeEl.sytle.display = "none";
+  questionEl.textContent = 'All DONE!';
+  choicesEl.sytle.display = "none";
+  finalScore.textContent = "Your Score is " + highScoreCounter;
 }
 
 

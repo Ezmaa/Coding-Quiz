@@ -10,28 +10,34 @@
 </head>
 
 <body>
-    <Header>
-        <h1 id="time"></a></h1>
-        <h2 id="high"><a href="#Highscore">View High Score</h2>
-    </Header>
     <main>
-    <div class="container">
-        <div class="main-question">
-            <!-- <h3>Are you ready for the coding quiz?</h3>
-            <p>Press the start button to begin quiz!</p> -->
-            <button id="start-button">Start</button>
+        <!-- Timer and Highscore -->
+        <div>
+            <h1 id="time"></a>Time:</h1>
+            <h2 id="high"><a href="#">View High Score</h2>
         </div>
-    </div>
-        <section class="questions">
-            <h4 id="quiz-question"></h4>
-            <ol>
-                <!-- <li id="q1"><button></button></li>
-                <li id="q2"><button></button></li>
-                <li id="q3"><button></button></li>
-                <li id="q4"><button></button></li> -->
-            </ol>
-            <h5 id="wrong-right"></h5>
-        </section>
+        <!-- start page -->
+        <div id="start">
+            <h5>Welcome to the Coding Quiz!</h5>
+            <p>Test your coding knowledge witht the timed coding quiz challenge! When the quiz begins a you will only have 50 seconds to answer four coding questions. Each time you get an answer right 50pts will be added to your score. Each time you get an answer wrong 10 seconds will be subtracted from the timer! Goodluck!</p>
+            <button id="start-button">Start</button>
+         </div>
+        <div class="container">
+            <div class="main-question">
+            </div>
+        </div>
+        <!-- questions -->
+        <div class="questions">
+            <h3 id="quiz-question"></h3>
+            <ol></ol>        
+        </div>
+        <!-- score submission page  -->
+        <div id="score-page">
+            <div >
+
+            </div>
+
+        </div>
     </main>
 </body>
 
