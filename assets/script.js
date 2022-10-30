@@ -2,38 +2,35 @@
 const timeEl = document.getElementById("time");
 const questionEl = document.querySelector('h4')
 const choicesEl = document.querySelector('ol')
-const questionOneEl = document.getElementById("q1");
-const questionTwoEl = document.getElementById("q2");
-const questionThreeEl = document.getElementById("q3");
-const questionFourEl = document.getElementById("q4");
 const highScoreEl = document.getElementById('high');
-const wrongOrRight = document.getElementById('wrong-right');
+const wrongOrRight = document.querySelector('h5');
 const startButtonEl = document.getElementById('start-button');
 
 let start = true;
-let secondsLeft = 75;
+let secondsLeft = 0;
 let index = 0;
+let highScoreCounter = 0;
 
 let questionsArr = [
   {
     question: 'Which of the following keywords is used to define a variable in Javascript?',
-    choices: ["Var", "Let", "Both 1 and 2", "None"],
-    answer: 2
+    choices: ["var", "let", "Both 1 and 2", "None"],
+    answer: "var",
   },
   {
     question: 'Javascript is an _______ language?',
     choices: ["Object-Oriented", "Object-Based", "Procedural", "None of the above"],
-    answer: 3
+    answer: "Object-oriented",
   },
   {
     question: 'Which of the following methods is used to access HTML elements using Javascript?',
     choices: ["getElemntById()", "getElementByClassName()", "Both 1 and 2", "None of the above"],
-    answer: 4
+    answer: "Both 1 and 2",
   },
   {
     question: 'How can a datatype be declared to be a constant type?',
     choices: ["Const", "Var", "Let", "Constant"],
-    answer: 0
+    answer: "Const",
   }
 ]
 
@@ -61,18 +58,21 @@ function checkAnswer(event) {
 
   let chosenAnswer = event.target.innerHTML
   if (chosenAnswer == questionsArr[index].answer) {
-    //tell correct at bottom
     //increase score by 50
+    highScoreCounter = highScoreCounter + 50;
   } else {
-    //tell incorrect at bottom
     //substract time by 10
+    secondsLeft = secondsLeft - 10;
+    timeEl.textContent = "Time Left: " + secondsLeft;
   }
- 
-//compare index to length of questionsArr
-//if end of array, end game
-//else
+  //compare index to length of questionsArr
+  //if end of array, end game
+  //else
   index++;
   displayQuestions();
+}
+
+function endGame() {
 
 }
 
@@ -84,69 +84,15 @@ function init() {
 }
 // added start button 
 function beginQuiz() {
-  secondsLeft = 75;
+  secondsLeft = 50;
+  startButtonEl.disabled = true;
   startTime();
   displayQuestions()
 }
 
-// function questionOne() {
-//   questionEl.textContent = "Which of the following keywords is used to define a variable in Javascript?";
-//   const rightAnswer = questionOneEl;
-//   questionOneEl.textContent = "Var";
-//   questionTwoEl.textContent = "Let";
-//   questionThreeEl.textContent = "Both 1 and 2";
-//   questionFourEl.textContent = "None";
-//   if (rightAnswer) {
-//     wrongOrRight.textContent = "Correct"
-//   } else {
-//     wrongOrRight.textContent = "false"
-//   }
-// }
-
-// function questionTwo() {
-//   questionEl.textContent = "Javascript is an _______ language?";
-//   questionOneEl.textContent = "Object-Oriented";
-//   questionTwoEl.textContent = "Object-Based";
-//   questionThreeEl.textContent = "Procedural";
-//   questionFourEl.textContent = "None of the above";
-//   if ()
-// } 
-
-// function questionThree() {
-//   questionEl.textContent = "Which of the following methods is used to access HTML elements using Javascript?";
-//   questionOneEl.textContent = "getElemntById()";
-//   questionTwoEl.textContent = "getElementByClassName()";
-//   questionThreeEl.textContent = "Both 1 and 2";
-//   questionFourEl.textContent = "None of the above";
-//   if ()
-// }
-
-// function questionFour() {
-//   questionEl.textContent = "How can a datatype be declared to be a constant type?";
-//   questionOneEl.textContent = "Const";
-//   questionTwoEl.textContent = "Var";
-//   questionThreeEl.textContent = "Let";
-//   questionFourEl.textContent = "Constant";
-//   if ()
-// }
-
 startButtonEl.addEventListener('click', beginQuiz);
 
-
-
-
-
-
-
-
-
-
-
-
-
 // Create count down timer for quiz 
-
-
 function startTime() {
   const timerInterval = setInterval(function () {
     secondsLeft--;
@@ -161,6 +107,7 @@ function startTime() {
 
 function sendMessage() {
   timeEl.textContent = " ";
+  
 
 }
 
