@@ -1,14 +1,16 @@
 // Add class selectors
-const timeEl = document.getElementById("time");
+const timeEl = document.getElementById('time');
 const questionEl = document.querySelector('h4');
-const finalScore = document.getElementById('score-page');
+const userInitials = document.getElementById('initials');
+let yourScore = document.querySelector('your-score');
 const choicesEl = document.querySelector('ol');
 const highScoreEl = document.getElementById('high');
 const initialStart = document.getElementById('start');
 const startButtonEl = document.getElementById('start-button');
+const submitBtn = document.getElementById('submitBtn');
 
 let start = true;
-let secondsLeft = 0;
+let secondsLeft = 50;
 let index = 0;
 let highScoreCounter = 0;
 
@@ -35,9 +37,35 @@ let questionsArr = [
   }
 ]
 
+// added start button 
+function beginQuiz() {
+  secondsLeft = 50;
+  startButtonEl.hidden = true;
+  initialStart.textContent = "";
+  // userInitials.textContent = "";
+  startTime();
+  displayQuestions()
+};
+
+startButtonEl.addEventListener('click', beginQuiz);
+
+// Create count down timer for quiz 
+function startTime() {
+  const timerInterval = setInterval(function () {
+    secondsLeft--;
+    timeEl.textContent = "Time Left: " + secondsLeft;
+    if (secondsLeft <= 0 || index >= questionsArr.length) {
+      clearInterval(timerInterval);
+      endGame();
+  }
+  }, 1000);
+};
+
+
+
 // sorts array and displays questions + answers 
 function displayQuestions() {
-  questionEl.textContent = questionsArr[index].question
+  questionEl.textContent = questionsArr[index].question;
   choicesEl.textContent = '';
   for (let i = 0; i < questionsArr[index].choices.length; i++) {
     //create html tag for each one of the choices
@@ -47,14 +75,11 @@ function displayQuestions() {
     choicesEl.appendChild(li)
     li.onclick = checkAnswer;
   }
-}
+};
 
 // checks answer adds points or subtracts from timer
 function checkAnswer(event) {
   event.preventDefault();
-  console.log(event.target.innerHTML)
-  console.log(this.textContent)
-
   let chosenAnswer = event.target.innerHTML
   if (chosenAnswer == questionsArr[index].answer) {
     //increase score by 50
@@ -63,57 +88,47 @@ function checkAnswer(event) {
     //substract time by 10
     secondsLeft = secondsLeft - 10;
     timeEl.textContent = "Time Left: " + secondsLeft;
-
   }
-  //compare index to length of questionsArr
-  //if end of array, end game
-  //else
-
   index++;
   displayQuestions();
 }
 
-
-
-
-// index++
-// example()
-
-// function init() {
-//   getscores();
-// }
-
-// added start button 
-function beginQuiz() {
-  secondsLeft = 50;
-  startButtonEl.hidden = true;
-  initialStart.textContent = "";
-  startTime();
-  displayQuestions()
-}
-
-startButtonEl.addEventListener('click', beginQuiz);
-
-// Create count down timer for quiz 
-function startTime() {
-  const timerInterval = setInterval(function () {
-    secondsLeft--;
-    timeEl.textContent = "Time Left: " + secondsLeft;
-    if (secondsLeft <= 0) {
-      clearInterval(timerInterval);
-      if (questionsArr[i] < questionsArr.length) {
-      endGame();
-    }
-    
-  }, 1000);
-};
-
+// game is ended and highscores page is displayed 
 function endGame() {
-  timeEl.sytle.display = "none";
-  questionEl.textContent = 'All DONE!';
-  choicesEl.sytle.display = "none";
-  finalScore.textContent = "Your Score is " + highScoreCounter;
+  timeEl.textContent = "";
+  questionEl.textContent = "";
+  choicesEl.textContent = "";
+  yourScore.textContent = "Your Score is " + highScoreCounter;
+  userInitials.style.display = "block";
+  // need to display submit form once quiz is finished 
 }
 
+// store highscores in local storage 
+submitBtn.addEventListener("click", function(event) {
+  event.preventDefault();
 
+if (userInitials.textContent === "") {
+  alert("Please enter your initials!");
+  return;
+}
 
+const userScore = {
+  user: userInitials.value,
+  score: highScoreCounter.value 
+};
+ 
+
+localStorage.setItem("userScore", JSON.stringify(userScore));
+renderMessage();
+});
+
+function renderMessage() {
+  let scoreInput = JSON.parse(localStorage.getItem("userScore"));
+  if (scoreInput !== null) {
+    yourScore.textContent = scoreInput.user + " score is " + scoreInput.score
+  }
+}
+
+console.log(userInitials);
+console.log(userScore);
+console.log();
